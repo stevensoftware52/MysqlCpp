@@ -20,6 +20,16 @@
 #define _CONCAT3_(A,B,C) "CONCAT( " A " , " B " , " C " )"
 #define _OFFSET_         "LIMIT %d,1"
 
+#define FORMAT_STRING_ARGS(format, output, len)									 \
+{																				 \
+	va_list ap;																	 \
+	char szQuery[len];															 \
+	va_start(ap, format);														 \
+	int32 res = vsprintf(szQuery, format, ap);									 \
+	va_end(ap);																	 \
+	output = szQuery;															 \
+}
+
 // Callback results are in the same queue as QueueExecuteQuery and CommitManyQueries
 // ::Query and ::ExecuteQueryInstant are asynchronous with m_queueQueries
 class Database
