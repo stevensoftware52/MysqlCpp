@@ -305,8 +305,8 @@ bool Database::RawMysqlQueryCall(const std::string strQuery, const bool bDeleteG
 
     if (mysql_query(m_pMYSQL, strQuery.c_str()))
     {
-        printfDb("SQL Error: '%s'.", mysql_error(m_pMYSQL));
-        printfDb("Query: '%s'.", strQuery.c_str());
+        printf("SQL Error: '%s'.", mysql_error(m_pMYSQL));
+        printf("Query: '%s'.", strQuery.c_str());
         return false;
     }
 
