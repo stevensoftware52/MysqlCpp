@@ -49,7 +49,7 @@ class Database
         void CommitManyQueries();
         void CancelManyQueries();
         
-        void queueCallbackQuery(const uint64 id, const std::unordered_map<uint8, std::string> queries, const std::string msgToSelf = "") 
+        void queueCallbackQuery(const uint64 id, const std::unordered_map<uint8, std::string>& queries, const std::string msgToSelf = "") 
         { 
             m_queueQueries.push(std::shared_ptr<CallbackQueryObj>(new CallbackQueryObj(id, msgToSelf, queries)));
         }

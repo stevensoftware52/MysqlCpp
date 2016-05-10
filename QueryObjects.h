@@ -42,7 +42,7 @@ class CallbackQueryObj : public QueryObj
             m_uoQueries[0] = query;
         }
 
-        CallbackQueryObj(const uint64 id, const std::string msgToSlelf, const std::unordered_map<uint8, std::string> queries) :
+        CallbackQueryObj(const uint64 id, const std::string msgToSlelf, const std::unordered_map<uint8, std::string>& queries) :
                 m_uoQueries(queries),
                 m_uiId(id)
         {}
