@@ -13,7 +13,7 @@ if (!GameDb.Initialize("host;port;user;pw;dbname"))
     return false;
 }
 
-// Example query
+// Example blocking query
 if (std::shared_ptr<QueryResult> result = GameDb.Query("SELECT entry, name FROM table"))
 {
     do
@@ -24,6 +24,28 @@ if (std::shared_ptr<QueryResult> result = GameDb.Query("SELECT entry, name FROM 
     }
     while (result->NextRow());
 }
+
+// If you wan't to issue a non blocking query without concern for the result, you queue it as such.
+// The queue is executed in the order it's given queries, but is asynchronous to executions outside of that queue.
+GameDb.QueueExecuteQuery("UPDATE table SET name = "");
+
+// Executes a blocking query without concern for the result.
+GameDb.ExecuteQueryInstant("UPDATE table SET );
+
+// If you want to set-up adding many queries to the queue at once with the option to cancel before you've finished adding them all in.
+GameDb.BeginManyQueries();
+
+// Would have many calls of 'QueueExecuteQuery' inside SaveAllPlayers().
+if (Game::SaveAllPlayers())
+{
+    GameDb.CommitManyQueries();
+}
+else
+{
+    printf("Failed to save all players!");
+    CancelTransaction();
+}
+    
 
 // Cleanup
 GameDb.Uninitialise();
