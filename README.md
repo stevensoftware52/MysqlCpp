@@ -44,7 +44,7 @@ if (Game::SaveAllPlayers())
 else
 {
     printf("Failed to save all players!");
-    CancelTransaction();
+    GameDb.CancelTransaction();
 }
     
 // If you want to get data without blocking, you queue up what I called a "Callback" by providing an ID and a query string.
