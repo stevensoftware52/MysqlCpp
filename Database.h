@@ -45,27 +45,36 @@ class Database
         void EscapeString(std::string& str);
         void GrabAndClearCallbackQueries(std::unordered_map<uint64, std::shared_ptr<CallbackQueryObj::ResultQueryHolder>>& result);
         
+		// Adds to the async queue
         void BeginManyQueries();
         void CommitManyQueries();
         void CancelManyQueries();
         
+		// Query: Non-blocking, adds to the async queue
         void queueCallbackQuery(const uint64 id, const std::unordered_map<uint8, std::string>& queries, const std::string msgToSelf = "") 
         { 
             m_queueQueries.push(std::shared_ptr<CallbackQueryObj>(new CallbackQueryObj(id, msgToSelf, queries)));
         }
 
+		// Query: Non-blocking, adds to the async queue
         void queueCallbackQuery(const uint64 id, const std::string query, const std::string msgToSelf = "") 
         { 
             m_queueQueries.push(std::shared_ptr<CallbackQueryObj>(new CallbackQueryObj(id, msgToSelf, query)));
         }
+		
+		// Query: Non-blocking, adds to the async queue
+        bool QueueExecuteQuery(const char* format, ...);
+		
+		// Query: Blocking, returns upon completion.
+        bool ExecuteQueryInstant(const char* format, ...); 
 
         bool Uninitialise();
-        bool Initialize(const char* infoString);
-        bool QueueExecuteQuery(const char* format, ...);
-        bool ExecuteQueryInstant(const char* format, ...);    
+        bool Initialize(const char* infoString);   
         
+		// Query: Blocking, returns upon completion.
         int32 QueryInt32(const char* format, ...);
 
+		// Query: Blocking, returns upon completion.
         std::shared_ptr<QueryResult> Query(const char* format, ...);
 
         operator bool () const { return m_pMYSQL != NULL; }
