@@ -237,7 +237,7 @@ std::shared_ptr<QueryResult> Database::PerformQuery(const std::string strQuery)
         return nullptr;
     }
 
-    return std::shared_ptr<QueryResult>(new QueryResult(pResult, mysql_fetch_fields(pResult), uiNumRows, uiNumFields));
+    return std::make_shared<QueryResult>(pResult, mysql_fetch_fields(pResult), uiNumRows, uiNumFields);
 }
 
 void Database::BeginManyQueries()
@@ -251,7 +251,7 @@ void Database::CommitManyQueries()
     std::vector<std::shared_ptr<QueryObj>> result;
 
     for (size_t i = 0; i < m_vTransactionQueries.size(); ++i)
-        result.push_back(std::shared_ptr<QueryObj>(new QueryObj(m_vTransactionQueries[i])));
+        result.push_back(std::make_shared<QueryObj>(m_vTransactionQueries[i]));
 
     // We anticipate that 
     m_queueQueries.pushMany(result);
@@ -293,7 +293,7 @@ bool Database::QueueExecuteQuery(const char*  format,...)
     else
     {
         ASSERT(!strQuery.empty());
-        m_queueQueries.push(std::shared_ptr<QueryObj>(new QueryObj(strQuery)));
+        m_queueQueries.push(std::make_shared<QueryObj>(strQuery));
     }
 
     return true;
