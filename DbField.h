@@ -1,7 +1,3 @@
-/*
-** gummy52
-*/
-
 #ifndef _DBFIELD_H
 #define _DBFIELD_H
 

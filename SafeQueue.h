@@ -1,7 +1,3 @@
-/*
-** gummy52
-*/
-
 #ifndef SAFE_QUEUE
 #define SAFE_QUEUE
 

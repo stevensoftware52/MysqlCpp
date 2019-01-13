@@ -1,7 +1,3 @@
-/*
-** gummy52
-*/
-
 #include "DbField.h"
 #include "Database.h"
 

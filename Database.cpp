@@ -1,7 +1,3 @@
-/*
-** gummy52
-*/
-
 #include "Database.h"
 
 #include <ctime>

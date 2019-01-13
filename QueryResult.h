@@ -1,7 +1,3 @@
-/*
-** gummy52
-*/
-
 #ifndef _QUERYRESULT_H
 #define _QUERYRESULT_H
 

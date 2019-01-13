@@ -1,7 +1,3 @@
-/*
-** gummy52
-*/
-
 #ifndef QUERYOBJECTS_H
 #define QUERYOBJECTS_H
 
